@@ -1,31 +1,26 @@
 import React, { FC } from 'react';
 import styles from './styles.module.css';
 import { containPresenter } from '../../utils/HoC';
-import SendIcon from '@mui/icons-material/Send';
+import Send from '@mui/icons-material/Send';
 
-export const IconList = {
-  SendIcon: 'SendIcon',
+export const iconList = {
+  Send,
 };
 
 
-export type IconProps = {
-  iconName: string | typeof React.Component;
-} & React.ComponentProps<typeof SendIcon>
+type IconPresenterType = {
+  iconName: keyof typeof iconList;
+} & React.ComponentProps<typeof Send> //FIXME: typeof 汎用的なIconにする
 
-export const IconPresenter: FC<IconProps> = ({
-  iconName: IconName,
+export const IconPresenter: FC<IconPresenterType> = ({
+  iconName,
   height = 20,
   width = 20,
   ...props
 }) => {
-  console.log(SendIcon);
-  console.log(IconName);
-  console.log(<SendIcon />);
-  console.log(<IconName />);
-
+  const Tag = iconList[iconName];
   return (
-    // <IconName
-    <SendIcon
+    <Tag
       height={height}
       width={width}
       {...props}
@@ -48,8 +43,7 @@ export const IconContainer: FC<IconContainerType> = ({
   return presenter({ onClick, className, ...props });
 };
 
-// export const Icon = ({ iconName, props }: React.ComponentProps<any>) => {
-//   const Icon = containPresenter(IconContainer, IconPresenter);
-//   return <Icon {...{ iconName, ...props }} />;
-// };
+
+export type IconProps = IconContainerType | IconPresenterType;
+
 export const Icon = containPresenter(IconContainer, IconPresenter);

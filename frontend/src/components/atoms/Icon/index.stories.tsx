@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf, ComponentStory, ComponentMeta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Icon, IconProps, IconList } from './index';
+import { Icon, IconProps } from './index';
 
 const something = action('something');
 const onClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -21,11 +21,11 @@ const Template: ComponentStory<typeof Icon> = (
 
 export const デフォルト = Template.bind({});
 デフォルト.args = {
-  iconName: 'SendIcon'
+  iconName: 'Send'
 };
 
-// export const クリッカブル = Template.bind({});
-// クリッカブル.args = {
-//   iconName: 'Send',
-//   onClick
-// };
+export const クリッカブル = Template.bind({});
+クリッカブル.args = {
+  iconName: 'Send',
+  onClick
+};
