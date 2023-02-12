@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  frontend:
+    # image: node:18-alpine
+    build: ./frontend
+    command: sh -c "yarn install && yarn start"
+    ports:
+      - 3000:3000
+    working_dir: /app/frontend
+    volumes:
+      - ./frontend/:/app/frontend #これがないと自動更新できない
+      - frontend-data:/app/frontend/node_modules # volumeのエントリポイント => 高速化
+    environment:
+      PORT: 3000 # コンテナ内でのポート番号
+
+volumes:
+  frontend-data:
+    name: frontend-data
