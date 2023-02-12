@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
-import styles from './styles.module.css';
-import MuiButton from '@material-ui/core/Button';
+import { Button as MuiButton } from "@mui/material";
 
-type ButtonFactory = React.ComponentProps<typeof MuiButton>  //「|」だとダメ
+type ButtonFactory_ = React.ComponentProps<typeof MuiButton>
+type ButtonFactory = Omit<ButtonFactory_, 'color'>
 
 type Color = "inherit" | "primary" | "secondary" | "default" | undefined
 
 
 const buttonFactory = (color: Color): FC<ButtonFactory> => ({
-  children, className, ...props
+  children, variant = "contained", ...props
 }) => (
   <MuiButton
-    color={color}
-    variant="contained"
+    // color={color}
+    variant={variant}
     {...props}
   >
     {children}
@@ -20,8 +20,8 @@ const buttonFactory = (color: Color): FC<ButtonFactory> => ({
 );
 
 
-export const Button = buttonFactory('default');
+const Button = buttonFactory('default');
 export const PrimaryButton = buttonFactory('primary');
-export const WarningButton = buttonFactory('default');
+export const WarningButton = buttonFactory('secondary');
 
 export default Button;
