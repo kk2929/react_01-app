@@ -1,17 +1,21 @@
 import React, { FC } from 'react';
-import { Button as MuiButton } from "@mui/material";
+import { Button as MuiBtn } from "@mui/material";
+import styled from "@emotion/styled";
 
-type ButtonFactory_ = React.ComponentProps<typeof MuiButton>
+const MuiButton = styled(MuiBtn)`
+text-transform: none;
+`;
+
+type ButtonFactory_ = React.ComponentProps<typeof MuiBtn>
 type ButtonFactory = Omit<ButtonFactory_, 'color'>
 
-type Color = "inherit" | "primary" | "secondary" | "default" | undefined
+type Color = "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning" | undefined
 
-
-const buttonFactory = (color: Color): FC<ButtonFactory> => ({
+const buttonFactory = (color?: Color): FC<ButtonFactory> => ({
   children, variant = "contained", ...props
 }) => (
   <MuiButton
-    // color={color}
+    color={color}
     variant={variant}
     {...props}
   >
@@ -20,8 +24,12 @@ const buttonFactory = (color: Color): FC<ButtonFactory> => ({
 );
 
 
-const Button = buttonFactory('default');
+const Button = buttonFactory();
 export const PrimaryButton = buttonFactory('primary');
-export const WarningButton = buttonFactory('secondary');
+export const SecondaryButton = buttonFactory('secondary');
+export const SuccessButton = buttonFactory('success');
+export const ErrorButton = buttonFactory('error');
+export const InfoButton = buttonFactory('info');
+export const WarningButton = buttonFactory('warning');
 
 export default Button;
