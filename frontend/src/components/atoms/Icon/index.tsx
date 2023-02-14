@@ -7,7 +7,6 @@ export const iconList = {
   Send,
 };
 
-
 type IconPresenterType = {
   iconName: keyof typeof iconList;
 } & React.ComponentProps<typeof Send> //FIXME: typeof 汎用的なIconにする
@@ -46,4 +45,4 @@ export const IconContainer: FC<IconContainerType> = ({
 
 export type IconProps = IconContainerType | IconPresenterType;
 
-export const Icon = containPresenter(IconContainer, IconPresenter);
+export const Icon: FC<IconProps> = containPresenter(IconContainer, IconPresenter);
