@@ -1,0 +1,7 @@
+.input {
+	/* color: #f00 !important; */
+}
+
+.input:disabled {
+	background: #dadada;
+}
