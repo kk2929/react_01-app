@@ -3,14 +3,14 @@ import styles from './styles.module.css';
 import { TextField } from '@mui/material';
 
 export type InputProps = React.ComponentProps<typeof TextField> & {
-	errorMsg: string
-	handleChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
+	errorMsg?: string
+	handleChange?: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
 }
 
 const Input: FC<InputProps> = ({
 	errorMsg = "",
 	size = "small",
-	handleChange = () => true,
+	handleChange,
 	...props
 }) => {
 	// const [value, setValue] = useState('');
