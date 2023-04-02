@@ -21,8 +21,11 @@ export type TableProps = {
 
 export const Table: FC<TableProps> = ({ heads, rows, ...props }) => {
   return (
-    <TableContainer component={Paper}>
-      <MuiTable sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer component={Paper} style={{
+      width: "max-content",
+      border: "1px solid #ddd",
+    }}>
+      <MuiTable sx={{ minWidth: 650 }} aria-label="simple table" {...props}>
         <TableHead>
           <TableRow>
             {heads.map((head, i) => (
