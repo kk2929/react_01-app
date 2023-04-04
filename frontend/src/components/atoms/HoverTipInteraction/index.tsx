@@ -1,4 +1,4 @@
-import React, { Component, FC } from 'react';
+import React, { FC } from 'react';
 import styles from './styles.module.css';
 import { containPresenter } from '../../utils/HoC';
 

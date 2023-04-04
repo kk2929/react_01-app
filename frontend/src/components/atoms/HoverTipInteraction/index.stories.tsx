@@ -1,7 +1,6 @@
 import React from 'react';
-import { storiesOf, ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 import HoverTipInteraction, { Tip, Marker } from './index';
-import { withStyle } from '../../utils/decorators';
 
 export default {
   title: 'atoms/HoverTipInteraction',
@@ -11,19 +10,16 @@ export default {
   },
 } as ComponentMeta<typeof HoverTipInteraction>;
 
-const Template: ComponentStory<typeof HoverTipInteraction> = (
-  { children, ...args }: any
-) => (
-  <HoverTipInteraction {...args}>
+const Template: ComponentStory<typeof HoverTipInteraction> = children => children
+
+export const デフォルト = Template.bind({});
+デフォルト.args =
+  <HoverTipInteraction
+    style={{ display: 'inline-block', margin: '50px' }}
+  >
     <span>ホバーしてね</span>
     <Tip><span>チップだよ</span></Tip>
   </HoverTipInteraction>
-)
-
-export const デフォルト = Template.bind({});
-デフォルト.args = {
-  style: { display: 'inline-block', margin: '50px' },
-};
 
 
 const Template00: ComponentStory<typeof HoverTipInteraction> = (
