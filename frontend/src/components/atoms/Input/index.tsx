@@ -13,12 +13,6 @@ const Input: FC<InputProps> = ({
 	handleChange,
 	...props
 }) => {
-	// const [value, setValue] = useState('');
-	// const handleChange = (event: any) => {
-	// 	const input = event.target.value;
-	// 	setValue(input);
-	// };
-
 	return (
 		<TextField
 			size={size}
