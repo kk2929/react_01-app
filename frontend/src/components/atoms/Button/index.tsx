@@ -10,13 +10,15 @@ export type ButtonProps = React.ComponentProps<typeof MuiButton>
 
 const Button: FC<ButtonProps> = ({
   children, variant = 'contained', ...props
-}) => (
-  <StyledMuiButton
-    variant={variant}
-    {...props}
-  >
-    {children}
-  </StyledMuiButton>
-);
+}) => {
+  return (
+    <StyledMuiButton
+      variant={variant}
+      {...props}
+    >
+      {children}
+    </StyledMuiButton >
+  )
+}
 
 export default Button;

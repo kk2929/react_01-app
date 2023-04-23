@@ -2,9 +2,11 @@ import React, { FC } from 'react';
 import styles from './styles.module.css';
 import { containPresenter } from '../../utils/HoC';
 import Send from '@mui/icons-material/Send';
+import Delete from '@mui/icons-material/Delete';
 
 export const iconList = {
   Send,
+  Delete,
 };
 
 type IconPresenterType = {
@@ -29,7 +31,7 @@ export const IconPresenter: FC<IconPresenterType> = ({
 
 
 type IconContainerType = {
-  presenter: (arg: any) => FC;  //引数：presenterのprops、戻り値：presenterから生成されたコンポーネント
+  presenter: (arg: any) => FC<IconPresenterType>;  //引数：presenterのprops、戻り値：presenterから生成されたコンポーネント
 } & React.ComponentProps<any>
 
 export const IconContainer: FC<IconContainerType> = ({

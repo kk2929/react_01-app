@@ -35,3 +35,5 @@ Outlined.args = {
 
 export const Success = () => <Button color='success'>dfas<br />改行</Button>;
 export const Warning = () => <Button color='warning'>Hello!<br />改行</Button>;
+// export const Success = () => <Button color='success'>dfas<br />改行</Button>;
+// export const Warning = () => <Button color='warning'>Hello!<br />改行</Button>;
