@@ -39,14 +39,14 @@ export const Table: FC<TableProps> = ({ heads, rows, ...props }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row, idx) => (
             <TableRow
-              key={row.name}
+              key={idx}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              {heads.map((head, i) => (
+              {heads.map((head, idx2) => (
                 <TableCell
-                  key={i}
+                  key={idx2}
                   {...head.props}
                 >
                   {row[head.keyName]}

@@ -14,6 +14,33 @@ services:
     environment:
       PORT: 3000 # コンテナ内でのポート番号
 
+  backend:
+    image: node:18-alpine
+    container_name: backend-container # コンテナ名
+    command: sh -c "yarn install && yarn run dev"
+    ports:
+      - 3001:3001
+    working_dir: /app/backend
+    volumes:
+      - ./backend-old/:/app/backend
+      - backend-data:/app/backend/node_modules # volumeのエントリポイント => 高速化
+    environment:
+      PORT: 3001 # コンテナ内でのポート番号
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - 63306:3306
+    volumes:
+      - test_02-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: test_db
+      TZ: Japan
+
 volumes:
+  test_02-mysql-data:
   frontend-data:
     name: frontend-data
+  backend-data:
+    name: backend-data

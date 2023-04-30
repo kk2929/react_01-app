@@ -1,3 +1,7 @@
+### package.json
+`"proxy": "http://backend-container:3001",`
+fetch の向き先
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

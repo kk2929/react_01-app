@@ -1,65 +1,79 @@
 import React, { useState, useEffect } from 'react';
-import { Table, TableProps, Head } from "../organisms/Table/index";
+import Drawer from "../atoms/Drawer/index";
 import Input from "../atoms/Input/index";
+import { Table, TableProps, Head } from "../organisms/Table/index";
 
-function App() {
-	const [val, setVal] = useState("3")
-	const [errorMsg, setErrorMsg] = useState("")
+type User = {
+	id: number;
+	name: string;
+	// name: any;
+}
 
-	const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => setVal(e.target.value)
+const App = () => {
+	const [users, setUsers] = useState<User[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
 
-	const isOK = (val: any, max: any, min: any) => {
-		if (val === "") return true
-		if (min <= val && val <= max) return true
-		else return false
+	const getUser = async () => {
+		setIsLoading(true);
+		// await new Promise(resolve => setTimeout(resolve, 2000))
+		const res = await (await fetch("/api/get")).json()
+		// const r = await (await fetch("http://localhost:8080/dev/test")).json()
+		const r = await (await fetch("http://localhost:8080/dev/hello", {
+			method: 'post',
+			body: JSON.stringify({ name: "testName" })
+		})).json()
+		console.log(r);
+
+		setUsers(res.rows);
+		setIsLoading(false);
+	};
+	const deleteUser = async (id: number) => {
+		await fetch(`/api/delete/${id}`)
+		await getUser();
 	}
+
 	useEffect(() => {
-		if (isOK(val, 10, 1)) setErrorMsg("")
-		else setErrorMsg("範囲外です")
-	}, [val])
+		(async () => {
+			await getUser();
+		})();
+	}, [])
 
-	const createInput = () => {
-		return (
-			<Input
-				style={{ width: 200 }}
-				label="メモ"
-				value={val}
-				errorMsg={errorMsg}
-				handleChange={handleChange}
-			/>
-		)
-	}
-	function createData(
-		name: string,
-		calories: number,
-		fat: number,
-		carbs: number,
-		protein: number,
-		memo?: any,
-	) { return { name, calories, fat, carbs, protein, memo }; }
-	const rows = [
-		createData('Frozen yoghurt', 159, 6.0, 24, 4.0, createInput()),
-		createData('Ice cream sandwich', 237, 9.0, 37, 4.3, createInput()),
-		createData('Eclair', 262, 16.0, 24, 6.0, createInput()),
-		createData('Cupcake', 305, 3.7, 67, 4.3, createInput()),
-		createData('Gingerbread', 356, 16.0, 49, 3.9, createInput()),
-	];
 	const heads: Head[] = [
-		{ name: '品名', keyName: 'name', props: { align: 'left' } },
-		{ name: 'カロリー[kcal]', keyName: 'calories', props: { align: 'right' } },
-		{ name: '脂肪', keyName: 'fat', props: { align: 'right' } },
-		{ name: '糖質', keyName: 'carbs', props: { align: 'right' } },
-		{ name: 'タンパク質', keyName: 'protein', props: { align: 'right' } },
-		{ name: 'メモ', keyName: 'memo', props: { align: 'right' } }
+		{ name: 'ID', keyName: 'id', props: { align: 'right' } },
+		{ name: '氏名', keyName: 'name', props: { align: 'right' } },
 	]
 
+	// const createInput = (val: any, i: any) => {
+	// 	return (
+	// 		<Input
+	// 			style={{ width: 200 }}
+	// 			label="メモ"
+	// 			value={val}
+	// 			errorMsg={errorMsg}
+	// 			handleChange={(e) => handleChange(e, i)}
+	// 		/>
+	// 	)
+	// }
+	const makeRows = (rows: any[]) => {
+		return rows.map((row: any) => {
+			const newRow = { ...row }
+			newRow.name =
+				<Drawer
+					trigger={row.name}
+				>
+					<p>contents</p>
+				</Drawer>
+			return newRow
+		})
+	}
+	const rows = makeRows(users);
+
 	return (
-		<div className="App">
+		<div style={{ margin: "1rem" }}>
 			<Table
 				heads={heads}
 				rows={rows}
 			/>
-			<p>value = {val}</p>
 		</div>
 	);
 }
