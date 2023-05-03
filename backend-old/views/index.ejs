@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  efadfef
+  <p>Welcome to <%= title %>
+  </p>
+  <% for( let i=0; i < rows.length; i++ ) { %>
+    <%= rows[i].id %>
+      <%= rows[i].username %>
+        <%= rows[i].email %>
+          <% } %>
+</body>
+
+</html>
