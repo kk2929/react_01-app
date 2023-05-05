@@ -21,11 +21,11 @@ export const デフォルト = Template.bind({});
       <p style={{ marginBottom: "20rem" }}>content</p>
       <p>content</p>
     </div>,
-  trigger: <button>トリガー</button>
+  // trigger: <button>トリガー</button>
 };
 
 export const リンク = Template.bind({});
 リンク.args = {
   children: <p>content</p>,
-  trigger: <a>トリガー</a>
+  // trigger: <a>トリガー</a>
 };
