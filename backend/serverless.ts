@@ -1,5 +1,6 @@
 import type { AWS } from '@serverless/typescript';
 
+import getUserByID from '@functions/getUserByID';
 import hello from '@functions/hello';
 import test from '@functions/test';
 
@@ -21,6 +22,7 @@ const serverlessConfiguration: AWS = {
   },
   // import the function via paths
   functions: {
+    getUserByID,
     hello,
     test,
   },

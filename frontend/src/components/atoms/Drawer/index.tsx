@@ -1,38 +1,26 @@
 
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import styles from './styles.module.css';
 import { Drawer as MuiDrawer } from '@mui/material';
-import { Link } from "@mui/material";
 
-export type DrawerProps = any
+export type DrawerProps = {
+	isOpen: boolean
+	toggleOpen: () => void
+} & React.ComponentProps<typeof MuiDrawer>
 
 const Drawer: FC<DrawerProps> = ({
 	children,
-	trigger,
+	isOpen,
+	toggleOpen,
 }) => {
-	const [isOpen, setIsOpen] = useState(false);
-	const toggleOpen = () => setIsOpen(!isOpen)
-
-	// const _trigger = React.cloneElement(trigger, {
-	// 	onClick: toggleOpen
-	// });
 	return (
-		<>
-			<Link
-				underline='hover'
-				className={styles.link}
-				onClick={toggleOpen}
-			>
-				{trigger}
-			</Link>
-			<MuiDrawer
-				anchor='right'
-				open={isOpen}
-				onClose={toggleOpen}
-			>
-				{children}
-			</MuiDrawer>
-		</>
+		<MuiDrawer
+			anchor='right'
+			open={isOpen}
+			onClose={toggleOpen}
+		>
+			{children}
+		</MuiDrawer>
 	);
 }
 

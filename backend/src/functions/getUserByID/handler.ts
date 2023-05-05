@@ -18,15 +18,16 @@ const dbSetting = {
   port: process.env.DB_PORT,
 };
 
-const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
+const getUserByID: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
   let connection
   try {
     connection = await mysql2.createConnection(dbSetting);
     let sql = `
 		  select t1.*
 		  from user as t1
+      where t1.id = ?
 		  ;`
-    let params = []
+    let params = [event.body.id]
     let [rows, fields] = await connection.query(sql, params);
 
     return formatJSONResponse({
@@ -42,4 +43,4 @@ const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) =
   }
 };
 
-export const main = middyfy(hello);
+export const main = middyfy(getUserByID);
